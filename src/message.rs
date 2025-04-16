@@ -47,7 +47,7 @@ impl Message {
                     } else {
                         let _ = end_message
                             .other
-                            .insert(part["key"].to_string(), part["value"].to_string());
+                            .insert(part["key"].to_string(), part["value"].trim().to_string());
                     }
                 }
             }
@@ -63,7 +63,7 @@ impl Message {
                         } else {
                             let _ = end_message
                                 .other
-                                .insert(part["key"].to_string(), part["value"].to_string());
+                                .insert(part["key"].to_string(), part["value"].trim().to_string());
                         }
                     }
                 }

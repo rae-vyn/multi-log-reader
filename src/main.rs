@@ -19,7 +19,12 @@ fn main() -> io::Result<()> {
 
     let messages = Message::messages_from_string(contents);
 
-    display_logs(messages);
+    for message in messages {
+        match message.action.as_str() {
+            "moneyMoved" => println!("{:#?}", message.other),
+            &_ => (),
+        }
+    }
 
     return Ok(());
 }
