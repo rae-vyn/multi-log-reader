@@ -21,7 +21,7 @@ fn main() -> io::Result<()> {
 
     for message in messages {
         match message.action.as_str() {
-            "moneyMoved" => println!("{:#?}", message.other),
+            "moneyMoved" => println!("{:#?}", message),
             &_ => (),
         }
     }

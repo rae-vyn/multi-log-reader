@@ -26,8 +26,8 @@ impl Message {
         let client_re =
             Regex::new(r"(?<timestamp>\d+:\d+:\d+).*Client sent message:\s+(?<contents>.*)")
                 .unwrap();
-        let message_content_re = Regex::new(r"\((?<key>\w+): (?<value>[\w\s;]+)\)").unwrap();
-        let client_content_re = Regex::new(r"(?<key>\w+):(?<value>[\w\s;]+)").unwrap();
+        let message_content_re = Regex::new(r"\((?<key>\w+): (?<value>[-\w\s;]+)\)").unwrap();
+        let client_content_re = Regex::new(r"(?<key>\w+):(?<value>[-\w\s;]+)").unwrap();
         let mut messages: Vec<Message> = vec![];
         for line in parse_lines(&contents) {
             let mut end_message = Message {
