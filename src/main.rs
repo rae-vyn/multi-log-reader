@@ -1,11 +1,9 @@
-use multi_log_reader::{args, parse_lines};
+use multi_log_reader::args;
 use clap::Parser;
 use std::collections::HashSet;
 use std::fs::File;
 use std::io::{self, Read};
-use regex::Regex;
-use colored::Colorize;
-use multi_log_reader::message::{Message, Sender};
+use multi_log_reader::message::Message;
 fn main() -> io::Result<()> {
     let used_args = args::Args::parse();
     let mut file = match File::open(&used_args.file_path) {
