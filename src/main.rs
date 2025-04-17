@@ -3,7 +3,7 @@ use clap::Parser;
 use std::collections::HashSet;
 use std::fs::File;
 use std::io::{self, Read};
-use multi_log_reader::message::Message;
+use multi_log_reader::message::{Action, Message, Sender};
 fn main() -> io::Result<()> {
     let used_args = args::Args::parse();
     let mut file = match File::open(&used_args.file_path) {
@@ -20,10 +20,8 @@ fn main() -> io::Result<()> {
     let messages = Message::messages_from_string(contents);
 
     for message in messages {
-        match message.action.as_str() {
-            "moneyMoved" => println!("{:#?}", message),
-            &_ => (),
-        }
+        println!("{}) {:#?}", message.clone().time, message);
+        println!("{}) {:#?}", message.clone().time, Action::from_message(message));
     }
 
     return Ok(());
