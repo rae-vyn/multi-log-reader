@@ -1,7 +1,8 @@
 use crate::message::*;
 
 pub fn interpret_message(message: Message) -> String {
-    let output = match Action::from_message(message.clone()) {
+    
+    match Action::from_message(message.clone()) {
         Action::JoinedLobby { code, game_type } => {
             format!("Joined {} game with code {}", game_type, code)
         }
@@ -54,6 +55,5 @@ pub fn interpret_message(message: Message) -> String {
         Action::StopGame => "Game Stopped".to_string(),
         Action::Magnet => "Sold magnet".to_string(),
         Action::MagnetResponse { key } => format!("Sent card for magnet: {}", key),
-    };
-    output
+    }
 }
