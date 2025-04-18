@@ -3,7 +3,7 @@ use multi_log_reader::args;
 use clap::Parser;
 use std::fs::File;
 use std::io::{self, Read};
-use multi_log_reader::message::{Action, Message, Sender};
+use multi_log_reader::message::{Message, Sender};
 use multi_log_reader::message_interpret::interpret_message;
 fn main() -> io::Result<()> {
     let used_args = args::Args::parse();
