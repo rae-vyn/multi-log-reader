@@ -1,9 +1,10 @@
+use colored::Colorize;
 use multi_log_reader::args;
 use clap::Parser;
-use std::collections::HashSet;
 use std::fs::File;
 use std::io::{self, Read};
 use multi_log_reader::message::{Action, Message, Sender};
+use multi_log_reader::message_interpret::interpret_message;
 fn main() -> io::Result<()> {
     let used_args = args::Args::parse();
     let mut file = match File::open(&used_args.file_path) {
@@ -20,20 +21,16 @@ fn main() -> io::Result<()> {
     let messages = Message::messages_from_string(contents);
 
     for message in messages {
-        println!("{}) {:#?}", message.clone().time, message);
-        println!("{}) {:#?}", message.clone().time, Action::from_message(message));
+        //println!("{}) {:#?}", message.clone().time, message);
+        //println!("{}) {:#?}", message.clone().time, Action::from_message(message.clone()));
+        let out = format!("{}", interpret_message(message.clone()));
+        if message.clone().sender == Sender::Client {
+            println!("{}) {}", message.time, out.green())
+        } else {
+            println!("{}) {}", message.time, out.red())
+        }
     }
 
     return Ok(());
-}
-
-
-
-fn display_logs(messages: Vec<Message>) {
-    let mut unique_keys: HashSet<String> = HashSet::new();
-    for message in messages {
-        unique_keys.insert(message.action);
-    }
-    println!("{:#?}", unique_keys);
 }
 

@@ -1,4 +1,4 @@
-keys = {
+local keys = {
     "createLobby", --
     "moneyMoved", --
     "leaveLobby", --

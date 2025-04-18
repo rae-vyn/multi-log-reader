@@ -104,8 +104,9 @@ pub enum Action {
     LoseGame,
     WinGame,
     GetEndGameJokers,
-    RecieveEndGameJokers {
+    ReceiveEndGameJokers {
         keys: Vec<String>,
+        seed: Option<String>
     },
     StopGame,
     Asteroid,
@@ -293,8 +294,8 @@ impl Action {
             "loseGame" => Self::LoseGame,
             "winGame" => Self::WinGame,
             "startBlind" => Self::StartBlind,
-            "recieveEndGameJokers" =>
-                Self::RecieveEndGameJokers {
+            "receiveEndGameJokers" =>
+                Self::ReceiveEndGameJokers {
                     keys: message.other
                         .get("keys")
                         .unwrap()
@@ -302,6 +303,7 @@ impl Action {
                         .filter(|x| !x.is_empty())
                         .map(|x| x.to_string())
                         .collect(),
+                    seed: message.other.get("seed").cloned()
                 },
             "skip" =>
                 Self::Skip { skips: message.other.get("skips").unwrap().parse::<i8>().unwrap() },
