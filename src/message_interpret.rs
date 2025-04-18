@@ -1,8 +1,7 @@
 use crate::message::*;
 
 pub fn interpret_message(message: Message) -> String {
-    let mut output = String::new();
-    output = match Action::from_message(message.clone()) {
+    let output = match Action::from_message(message.clone()) {
         Action::JoinedLobby { code, game_type } => {
             format!("Joined {} game with code {}", game_type, code)
         }
@@ -14,10 +13,10 @@ pub fn interpret_message(message: Message) -> String {
         Action::LobbyOptions { .. } => {
             format!("Lobby config: {:#?}", Action::from_message(message))
         }
-        Action::Username { username, mod_hash } => { format!("Set username to {}", username) }
+        Action::Username { username, mod_hash: _ } => { format!("Set username to {}", username) }
         Action::JoinLobby { code } => { format!("Entered lobby code {}", code) }
         Action::Asteroid => { "Sent an asteroid!".to_string() }
-        Action::StartGame { deck } => { "Game started".to_string() }
+        Action::StartGame { deck: _ } => { "Game started".to_string() }
         Action::Err => "Unsupported Action".to_string(),
         Action::EmptyOption => "Empty Options".to_string(),
         Action::Connected => "Connected to servers".to_string(),
