@@ -385,6 +385,6 @@ impl Message {
                 messages.push(end_message);
             }
         }
-        return messages;
+        messages
     }
 }

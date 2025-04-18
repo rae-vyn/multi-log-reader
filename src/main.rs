@@ -23,7 +23,7 @@ fn main() -> io::Result<()> {
     for message in messages {
         //println!("{}) {:#?}", message.clone().time, message);
         //println!("{}) {:#?}", message.clone().time, Action::from_message(message.clone()));
-        let out = format!("{}", interpret_message(message.clone()));
+        let out = interpret_message(message.clone()).to_string();
         if message.clone().sender == Sender::Client {
             println!("{}) {}", message.time, out.green())
         } else {
@@ -31,6 +31,6 @@ fn main() -> io::Result<()> {
         }
     }
 
-    return Ok(());
+    Ok(())
 }
 
